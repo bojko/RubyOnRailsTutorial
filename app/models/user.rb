@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  has_many :microposts, dependent: :destroy
   attr_accessor :remember_token, :activation_token
   before_save :downcase_email
   before_save :create_activation_digest
@@ -44,6 +45,7 @@ class User < ActiveRecord::Base
   # Forgets a user.
   def forget
     update_attribute(:remember_digest, nil)
+  end
   
   private
     # Converts email to all lower-case.
